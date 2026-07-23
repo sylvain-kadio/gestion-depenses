@@ -1,0 +1,21 @@
+# Environnement virtuel
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Base de données locale
+*.db
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# Variables d'environnement
+.env
+
+# Système
+Thumbs.db
+desktop.ini
