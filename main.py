@@ -27,25 +27,28 @@ def demander_montant() -> float:
             print("Montant invalide, réessaie (ex: 5000 ou 1500.50).")
 
 
-def ajouter_entree(repo: MouvementRepository) -> None:
+def ajouter_entree(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
     montant = demander_montant()
     note = input("Note (optionnel, Entrée pour passer) : ") or None
     repo.ajouter(Mouvement(date=date.today(), montant=montant, type=TypeMouvement.ENTREE, note=note))
     print("Entrée enregistrée.")
+    afficher_solde_mois(calculateur)
 
 
-def ajouter_depense(repo: MouvementRepository) -> None:
+def ajouter_depense(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
     montant = demander_montant()
     categorie = input("Catégorie (optionnel, Entrée pour passer) : ") or None
     note = input("Note (optionnel, Entrée pour passer) : ") or None
     repo.ajouter(Mouvement(date=date.today(), montant=montant, type=TypeMouvement.DEPENSE, categorie=categorie, note=note))
     print("Dépense enregistrée.")
+    afficher_solde_mois(calculateur)
 
 
-def ajouter_epargne(repo: MouvementRepository) -> None:
+def ajouter_epargne(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
     montant = demander_montant()
     repo.ajouter(Mouvement(date=date.today(), montant=montant, type=TypeMouvement.EPARGNE))
     print("Épargne enregistrée.")
+    afficher_solde_mois(calculateur)
 
 
 def afficher_solde_mois(calculateur: CalculateurSolde) -> None:
@@ -86,9 +89,9 @@ def main() -> None:
     calculateur = CalculateurSolde(repo)
 
     actions = {
-        "1": lambda: ajouter_entree(repo),
-        "2": lambda: ajouter_depense(repo),
-        "3": lambda: ajouter_epargne(repo),
+        "1": lambda: ajouter_entree(repo, calculateur),
+        "2": lambda: ajouter_depense(repo, calculateur),
+        "3": lambda: ajouter_epargne(repo, calculateur),
         "4": lambda: afficher_solde_mois(calculateur),
         "5": lambda: afficher_epargne_totale(calculateur),
         "6": lambda: afficher_repartition(calculateur),
