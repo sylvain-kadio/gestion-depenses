@@ -25,3 +25,10 @@
 - Refactoring pour rendre le repository testable (chemin de base injectable)
 - 3 tests du repository avec fixture pytest et base temporaire (tmp_path)
 - Total : 7 tests, tous passants
+
+## 31/07/2026 — 11h40 (suite 2)
+- Services : gestion des périodes (jour/semaine/mois/année) et calculateur de solde
+- Règle métier appliquée : solde = entrées - dépenses - épargne
+- Tests manuels en conditions réelles (calcul vérifié à la main : 50000 - 5000 - 10000 = 35000)
+- 4 tests du calculateur : solde par période, exclusion hors plage, épargne totale, répartition par catégorie
+- Total : 11 tests, tous passants
