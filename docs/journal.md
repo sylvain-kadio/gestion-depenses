@@ -17,3 +17,11 @@
 - Écriture de 4 tests unitaires avec pytest
 - Tous les tests passent (4 passed)
 - Découverte de Ruff comme aide au style de code (DTZ011)
+
+## 31/07/2026 — 11h40 (suite)
+- Création du schéma SQLite et du module de connexion
+- Repository MouvementRepository : ajouter, lister, supprimer
+- Test manuel en conditions réelles (persistance vérifiée dans depenses.db)
+- Refactoring pour rendre le repository testable (chemin de base injectable)
+- 3 tests du repository avec fixture pytest et base temporaire (tmp_path)
+- Total : 7 tests, tous passants
