@@ -11,3 +11,9 @@
 
 ## 31/07/2026 — 01:00
 - (à compléter en fin de session)
+
+## 31/07/2026 — 11h40
+- Test manuel de la classe Mouvement dans l'interpréteur (validation des règles de gestion)
+- Écriture de 4 tests unitaires avec pytest
+- Tous les tests passent (4 passed)
+- Découverte de Ruff comme aide au style de code (DTZ011)
