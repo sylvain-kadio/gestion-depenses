@@ -16,6 +16,7 @@ def afficher_menu() -> None:
     print("5. Voir l'épargne totale")
     print("6. Voir la répartition des dépenses du mois")
     print("7. Lister tous les mouvements")
+    print("8. Voir un résumé sur une période au choix (jour/semaine/mois/année)")
     print("0. Quitter")
 
 
@@ -25,6 +26,21 @@ def demander_montant() -> float:
             return float(input("Montant : "))
         except ValueError:
             print("Montant invalide, réessaie (ex: 5000 ou 1500.50).")
+
+
+def choisir_type_periode() -> TypePeriode:
+    print("Périodes disponibles : 1) Jour  2) Semaine  3) Mois  4) Année")
+    correspondance = {
+        "1": TypePeriode.JOUR,
+        "2": TypePeriode.SEMAINE,
+        "3": TypePeriode.MOIS,
+        "4": TypePeriode.ANNEE,
+    }
+    while True:
+        choix = input("Choix de la période : ")
+        if choix in correspondance:
+            return correspondance[choix]
+        print("Choix invalide, réessaie.")
 
 
 def ajouter_entree(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
@@ -37,7 +53,7 @@ def ajouter_entree(repo: MouvementRepository, calculateur: CalculateurSolde) -> 
 
 def ajouter_depense(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
     montant = demander_montant()
-    categorie = input("Catégorie (optionnel, Entrée pour passer) : ") or None
+    categorie = input("Catégorie (optionnel, Entrée pour passer) : ").strip() or None
     note = input("Note (optionnel, Entrée pour passer) : ") or None
     repo.ajouter(Mouvement(date=date.today(), montant=montant, type=TypeMouvement.DEPENSE, categorie=categorie, note=note))
     print("Dépense enregistrée.")
@@ -83,6 +99,32 @@ def lister_mouvements(repo: MouvementRepository) -> None:
         print(f"[{m.id}] {m.date} | {m.type.value:8} | {m.montant:>10.2f} FCFA{detail}{note}")
 
 
+def afficher_resume_periode(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
+    type_periode = choisir_type_periode()
+    debut, fin = plage_periode(type_periode)
+
+    print(f"\nPériode : {debut} -> {fin}")
+
+    solde = calculateur.solde_periode(debut, fin)
+    print(f"Solde disponible : {solde} FCFA")
+
+    repartition = calculateur.repartition_categories(debut, fin)
+    if repartition:
+        print("Répartition des dépenses :")
+        for categorie, montant in repartition.items():
+            print(f"  {categorie} : {montant} FCFA")
+
+    mouvements = [m for m in repo.lister() if debut <= m.date <= fin]
+    if mouvements:
+        print("Mouvements de la période :")
+        for m in mouvements:
+            detail = f" ({m.categorie})" if m.categorie else ""
+            note = f" - {m.note}" if m.note else ""
+            print(f"  [{m.id}] {m.date} | {m.type.value:8} | {m.montant:>10.2f} FCFA{detail}{note}")
+    else:
+        print("Aucun mouvement sur cette période.")
+
+
 def main() -> None:
     initialiser_base()
     repo = MouvementRepository()
@@ -96,6 +138,7 @@ def main() -> None:
         "5": lambda: afficher_epargne_totale(calculateur),
         "6": lambda: afficher_repartition(calculateur),
         "7": lambda: lister_mouvements(repo),
+        "8": lambda: afficher_resume_periode(repo, calculateur),
     }
 
     while True:
