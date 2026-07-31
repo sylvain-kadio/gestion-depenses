@@ -35,6 +35,24 @@ class MouvementRepository:
             lignes = connexion.execute("SELECT * FROM mouvements ORDER BY date").fetchall()
         return [self._vers_mouvement(ligne) for ligne in lignes]
 
+    def modifier(self, mouvement: Mouvement) -> None:
+        with obtenir_connexion(self.chemin_base) as connexion:
+            connexion.execute(
+                """
+                UPDATE mouvements
+                SET date = ?, montant = ?, type = ?, categorie = ?, note = ?
+                WHERE id = ?
+                """,
+                (
+                    mouvement.date.isoformat(),
+                    mouvement.montant,
+                    mouvement.type.value,
+                    mouvement.categorie,
+                    mouvement.note,
+                    mouvement.id,
+                ),
+            )
+
     def supprimer(self, id_mouvement: int) -> None:
         with obtenir_connexion(self.chemin_base) as connexion:
             connexion.execute("DELETE FROM mouvements WHERE id = ?", (id_mouvement,))

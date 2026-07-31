@@ -17,6 +17,8 @@ def afficher_menu() -> None:
     print("6. Voir la répartition des dépenses du mois")
     print("7. Lister tous les mouvements")
     print("8. Voir un résumé sur une période au choix (jour/semaine/mois/année)")
+    print("9. Modifier un mouvement")
+    print("10. Supprimer un mouvement")
     print("0. Quitter")
 
 
@@ -45,7 +47,7 @@ def choisir_type_periode() -> TypePeriode:
 
 def ajouter_entree(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
     montant = demander_montant()
-    note = input("Note (optionnel, Entrée pour passer) : ") or None
+    note = input("Note (optionnel, Entrée pour passer) : ").strip() or None
     repo.ajouter(Mouvement(date=date.today(), montant=montant, type=TypeMouvement.ENTREE, note=note))
     print("Entrée enregistrée.")
     afficher_solde_mois(calculateur)
@@ -54,7 +56,7 @@ def ajouter_entree(repo: MouvementRepository, calculateur: CalculateurSolde) -> 
 def ajouter_depense(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
     montant = demander_montant()
     categorie = input("Catégorie (optionnel, Entrée pour passer) : ").strip() or None
-    note = input("Note (optionnel, Entrée pour passer) : ") or None
+    note = input("Note (optionnel, Entrée pour passer) : ").strip() or None
     repo.ajouter(Mouvement(date=date.today(), montant=montant, type=TypeMouvement.DEPENSE, categorie=categorie, note=note))
     print("Dépense enregistrée.")
     afficher_solde_mois(calculateur)
@@ -125,6 +127,62 @@ def afficher_resume_periode(repo: MouvementRepository, calculateur: CalculateurS
         print("Aucun mouvement sur cette période.")
 
 
+def choisir_mouvement(repo: MouvementRepository) -> Mouvement | None:
+    lister_mouvements(repo)
+    mouvements = repo.lister()
+    if not mouvements:
+        return None
+    try:
+        id_choisi = int(input("ID du mouvement concerné : "))
+    except ValueError:
+        print("ID invalide.")
+        return None
+    mouvement = next((m for m in mouvements if m.id == id_choisi), None)
+    if mouvement is None:
+        print("Aucun mouvement avec cet ID.")
+    return mouvement
+
+
+def modifier_mouvement(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
+    mouvement = choisir_mouvement(repo)
+    if mouvement is None:
+        return
+
+    nouveau_montant = input(f"Nouveau montant (Entrée pour garder {mouvement.montant}) : ").strip()
+    if nouveau_montant:
+        try:
+            mouvement.montant = float(nouveau_montant)
+        except ValueError:
+            print("Montant invalide, non modifié.")
+
+    if mouvement.type == TypeMouvement.DEPENSE:
+        nouvelle_categorie = input(f"Nouvelle catégorie (Entrée pour garder '{mouvement.categorie}') : ").strip()
+        if nouvelle_categorie:
+            mouvement.categorie = nouvelle_categorie
+
+    nouvelle_note = input(f"Nouvelle note (Entrée pour garder '{mouvement.note}') : ").strip()
+    if nouvelle_note:
+        mouvement.note = nouvelle_note
+
+    repo.modifier(mouvement)
+    print("Mouvement modifié.")
+    afficher_solde_mois(calculateur)
+
+
+def supprimer_mouvement(repo: MouvementRepository, calculateur: CalculateurSolde) -> None:
+    mouvement = choisir_mouvement(repo)
+    if mouvement is None:
+        return
+
+    confirmation = input(f"Confirmer la suppression de [{mouvement.id}] {mouvement.montant} FCFA ? (o/n) : ").strip().lower()
+    if confirmation == "o":
+        repo.supprimer(mouvement.id)
+        print("Mouvement supprimé.")
+        afficher_solde_mois(calculateur)
+    else:
+        print("Suppression annulée.")
+
+
 def main() -> None:
     initialiser_base()
     repo = MouvementRepository()
@@ -139,6 +197,8 @@ def main() -> None:
         "6": lambda: afficher_repartition(calculateur),
         "7": lambda: lister_mouvements(repo),
         "8": lambda: afficher_resume_periode(repo, calculateur),
+        "9": lambda: modifier_mouvement(repo, calculateur),
+        "10": lambda: supprimer_mouvement(repo, calculateur),
     }
 
     while True:
