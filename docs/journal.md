@@ -44,3 +44,10 @@
 - Amélioration UX : affichage automatique du solde du mois après chaque ajout (entrée, dépense, épargne)
 - Correction d'une erreur d'indentation Python (unindent amount does not match)
 - Application testée en conditions réelles avec de vraies données personnelles
+
+## 01/08/2026 (suite)
+- Ajout du filtre par période (jour/semaine/mois/année) dans le menu
+- Nettoyage des saisies avec .strip() (espaces superflus dans catégorie/note)
+- Ajout de modifier() au repository (UPDATE SQL paramétré)
+- Ajout des options 9 (modifier) et 10 (supprimer) dans le menu
+- À tester à la prochaine session : le parcours complet ajouter -> modifier -> supprimer
