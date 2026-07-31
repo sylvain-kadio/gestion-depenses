@@ -32,3 +32,10 @@
 - Tests manuels en conditions réelles (calcul vérifié à la main : 50000 - 5000 - 10000 = 35000)
 - 4 tests du calculateur : solde par période, exclusion hors plage, épargne totale, répartition par catégorie
 - Total : 11 tests, tous passants
+
+## 31/07/2026 — 11h40 (suite 3) / 01/08/2026
+- Écriture de l'interface CLI (main.py) : menu interactif avec boucle while
+- Concepts découverts : input(), try/except pour la validation, dictionnaire d'actions, lambda, formatage f-string
+- Test manuel complet du parcours utilisateur (entrée, dépense, épargne, consultation du solde)
+- Solde vérifié : 2000 - 500 - 1000 = 500 FCFA, calcul correct
+- Application fonctionnelle de bout en bout : modèle → base → services → interface
