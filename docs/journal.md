@@ -39,3 +39,8 @@
 - Test manuel complet du parcours utilisateur (entrée, dépense, épargne, consultation du solde)
 - Solde vérifié : 2000 - 500 - 1000 = 500 FCFA, calcul correct
 - Application fonctionnelle de bout en bout : modèle → base → services → interface
+
+## 01/08/2026
+- Amélioration UX : affichage automatique du solde du mois après chaque ajout (entrée, dépense, épargne)
+- Correction d'une erreur d'indentation Python (unindent amount does not match)
+- Application testée en conditions réelles avec de vraies données personnelles
