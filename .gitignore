@@ -19,3 +19,4 @@ __pycache__/
 # Système
 Thumbs.db
 desktop.ini
+.pytest_cache/
