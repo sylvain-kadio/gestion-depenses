@@ -51,3 +51,10 @@
 - Ajout de modifier() au repository (UPDATE SQL paramétré)
 - Ajout des options 9 (modifier) et 10 (supprimer) dans le menu
 - À tester à la prochaine session : le parcours complet ajouter -> modifier -> supprimer
+
+## 03/08/2026 — 22h01 (suite)
+- Installation et configuration de Streamlit
+- Création de app.py : sidebar (filtre période), indicateurs (solde, épargne), formulaire d'ajout, graphique de répartition, liste des mouvements
+- Découverte du modèle de réexécution de Streamlit (script relancé à chaque interaction) et de st.form pour l'éviter
+- Interface graphique testée et fonctionnelle, sans aucune modification des couches models/repositories/services
+- Preuve concrète du bénéfice de l'architecture en couches : deux interfaces (CLI + Streamlit) partagent le même code métier
