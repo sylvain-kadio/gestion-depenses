@@ -6,6 +6,9 @@ Application de suivi de dépenses personnelles (quotidien, hebdomadaire, mensuel
 
 [![CI](https://github.com/sylvain-kadio/gestion-depenses/actions/workflows/ci.yml/badge.svg)](https://github.com/sylvain-kadio/gestion-depenses/actions/workflows/ci.yml)
 
+🔗 **[Voir l'application en ligne](https://gestion-depenses-js4kzm5nnanptpht5jadba.streamlit.app/
+)** *(version démo avec données fictives)*
+
 ## Statut
 
 🚧 Projet en cours de développement
