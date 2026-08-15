@@ -1,6 +1,10 @@
+
 # Gestion de Dépenses
 
 Application de suivi de dépenses personnelles (quotidien, hebdomadaire, mensuel, annuel), développée en Python dans le cadre d'une remise à niveau après une interruption professionnelle.
+
+
+[![CI](https://github.com/sylvain-kadio/gestion-depenses/actions/workflows/ci.yml/badge.svg)](https://github.com/sylvain-kadio/gestion-depenses/actions/workflows/ci.yml)
 
 ## Statut
 
