@@ -1,10 +1,11 @@
-import pytest
 from datetime import date
 
+import pytest
+
 from src.database.connexion import initialiser_base
+from src.models.mouvement import Mouvement, TypeMouvement
 from src.repositories.mouvement_repository import MouvementRepository
 from src.services.calculateur_solde import CalculateurSolde
-from src.models.mouvement import Mouvement, TypeMouvement
 
 
 @pytest.fixture

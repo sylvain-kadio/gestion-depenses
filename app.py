@@ -1,5 +1,6 @@
-import streamlit as st
 from datetime import date
+
+import streamlit as st
 
 from src.database.connexion import initialiser_base
 from src.models.mouvement import Mouvement, TypeMouvement

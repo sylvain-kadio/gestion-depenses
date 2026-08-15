@@ -1,6 +1,6 @@
+import calendar
 from datetime import date, timedelta
 from enum import Enum
-import calendar
 
 
 class TypePeriode(Enum):

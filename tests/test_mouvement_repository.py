@@ -1,9 +1,10 @@
-import pytest
 from datetime import date
 
+import pytest
+
 from src.database.connexion import initialiser_base
-from src.repositories.mouvement_repository import MouvementRepository
 from src.models.mouvement import Mouvement, TypeMouvement
+from src.repositories.mouvement_repository import MouvementRepository
 
 
 @pytest.fixture

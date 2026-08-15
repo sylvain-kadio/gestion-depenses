@@ -1,6 +1,6 @@
 from datetime import date
 
-from src.models.mouvement import TypeMouvement, Mouvement
+from src.models.mouvement import Mouvement, TypeMouvement
 from src.repositories.mouvement_repository import MouvementRepository
 
 

@@ -1,9 +1,9 @@
+import sqlite3
 from datetime import date
 from pathlib import Path
-import sqlite3
 
+from src.database.connexion import CHEMIN_BASE, obtenir_connexion
 from src.models.mouvement import Mouvement, TypeMouvement
-from src.database.connexion import obtenir_connexion, CHEMIN_BASE
 
 
 class MouvementRepository:
