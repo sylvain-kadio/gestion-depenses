@@ -58,3 +58,15 @@
 - Découverte du modèle de réexécution de Streamlit (script relancé à chaque interaction) et de st.form pour l'éviter
 - Interface graphique testée et fonctionnelle, sans aucune modification des couches models/repositories/services
 - Preuve concrète du bénéfice de l'architecture en couches : deux interfaces (CLI + Streamlit) partagent le même code métier
+
+## 04/08/2026 — 00h00
+- Interface Streamlit finalisée et testée (formulaire, indicateurs, graphique)
+- Décision : le déploiement web Streamlit suffit pour un accès PC/Android/iOS via navigateur
+- Projet natif Android/iOS mis de côté comme projet futur distinct, après finalisation de celui-ci
+- Reste à faire : tests manquants, CI GitHub Actions, déploiement, README final
+
+## 14/08/2026 — 23h33
+- Ajout du test de modifier() dans test_mouvement_repository.py
+- Ajout de tests_periode.py : jour, semaine, mois, annee (4 tests)
+- Correction d'une erreur d'arborescence (dossier tests/tests/ en double)
+- Total : 16 tests automatisés, tous passants
