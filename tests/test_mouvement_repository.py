@@ -35,3 +35,15 @@ def test_supprimer_retire_le_mouvement(repo):
     repo.supprimer(m.id)
 
     assert repo.lister() == []
+
+def test_modifier_met_a_jour_le_mouvement(repo):
+    m = repo.ajouter(Mouvement(date=date.today(), montant=5000, type=TypeMouvement.ENTREE))
+
+    m.montant = 8000
+    m.note = "montant corrigé"
+    repo.modifier(m)
+
+    mouvements = repo.lister()
+    assert len(mouvements) == 1
+    assert mouvements[0].montant == 8000
+    assert mouvements[0].note == "montant corrigé"
