@@ -1,8 +1,13 @@
+
+
+
+import os
 from datetime import date
 
 import streamlit as st
 
 from src.database.connexion import initialiser_base
+from src.database.donnees_demo import inserer_donnees_demo
 from src.models.mouvement import Mouvement, TypeMouvement
 from src.repositories.mouvement_repository import MouvementRepository
 from src.services.calculateur_solde import CalculateurSolde
@@ -13,6 +18,10 @@ st.set_page_config(page_title="Gestion de dépenses", page_icon="💰")
 initialiser_base()
 repo = MouvementRepository()
 calculateur = CalculateurSolde(repo)
+if os.environ.get("MODE_DEMO") == "true":
+    st.info("🔍 Mode démonstration — les données affichées sont fictives, générées pour la démo publique.")
+    if not repo.lister():
+        inserer_donnees_demo(repo)
 
 st.title("💰 Gestion de dépenses")
 
