@@ -70,3 +70,12 @@
 - Ajout de tests_periode.py : jour, semaine, mois, annee (4 tests)
 - Correction d'une erreur d'arborescence (dossier tests/tests/ en double)
 - Total : 16 tests automatisés, tous passants
+
+## 14/08/2026 — 23h33 (suite)
+- Résolution du dossier tests/tests en double
+- Ajout de 5 tests manquants (modifier + périodes), total 16 tests
+- Mise en place de la CI GitHub Actions (tests + ruff), badge vert obtenu
+- Correction des imports non triés (ruff --fix), configuration pyproject.toml (ignore DTZ011)
+- Création du mode démo (variable d'environnement MODE_DEMO) pour protéger les vraies données personnelles
+- Déploiement réussi sur Streamlit Community Cloud
+- Application accessible publiquement via URL
